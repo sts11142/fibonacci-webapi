@@ -183,6 +183,8 @@ $ bundle install
 ## ゴールを整理する
 決めたゴールに対して，詳細に内容を決めていきます．
 
+あと，一応featureブランチを切っておきます．
+
 ### （サーバ側）リクエストを受け取るページ
 ここでは，新しく`/easy_api`ルートを作成して，このルートにおいてリクエストを受信できるようにします．
 
@@ -213,4 +215,76 @@ URL: [https://sample-api-app.onrender.com/easy_api](https://path/to/app/easy_api
 
 ```
 $ rails generate controller EasyApi
+      create  app/controllers/easy_api_controller.rb
+      invoke  test_unit
+      create    test/controllers/easy_api_controller_test.rb
 ```
+
+この操作により，`app/controllers/easy_api_controller.rb`が作成されました．
+
+```diff ruby:app/controllers/easy_api_controller.rb
++class EasyApiController < ApplicationController
++end
+```
+
+このルートに`GET`を送る，ということは，すなわち`/easy_api`にアクセスするということです．  
+なので，このページが参照された場合，そのまま目的のレスポンスを返してあげることにしましょう．
+
+```diff ruby:app/controllers/easy_api_controller.rb
+class EasyApiController < ApplicationController
++ def index
++  render json: { status: 200, message: "Thanks!" }
++ end
+end
+```
+
+![](image/2023-06-27-22-42-31.png)
+*[第2章 Toyアプリケーション - Railsチュートリアル](https://railstutorial.jp/chapters/toy_app?version=7.0#cha-a_toy_app)，表2.2より*
+
+さて，ローカルで起動してみて検証してみます．
+
+```
+$ rails s
+```
+
+ん？あれれ，`/easy_api`を指定したらコケました．↓
+
+![](image/2023-06-27-22-46-05.png)
+*Routing Error*
+
+`Routing Error`です．  
+思い出したのですが，railsチュートリアルでもcontrollerを作成した際にルーティングファイルも変更していました．  
+（確かにVueでもViewページ作成とルート設定はセットですね...）
+
+ということで，以下の変更を加えて，改めてページを訪れます．
+
+```diff ruby: config/routes.rb
+Rails.application.routes.draw do
++ get 'easy_api', to: 'easy_api#index'
+  root 'application#hello'
+end
+```
+
+---
+
+余談ですが，`get ~`と`resources ~`の違いがよく分かっていませんでした．  
+調べてみた感じ，恐らく`resources ~`は複数のHTTPリクエストverbsに対応したものだと理解しました．
+
+つまり，`resources`は`get ~`や`post ~`などを一括で定義できる文法なのかなと．
+
+---
+
+## ルートへ訪れてみる
+さて，変更を加えてアクセスしてみると，無事にレスポンスが帰ってきたことが分かります．
+
+ちゃんと感謝されてるので，OKです！
+
+![](image/2023-06-27-23-24-50.png)
+*`/easy_api`へのアクセス．期待どおりのレスポンス*
+
+
+## Commit→Push→Merge→Deploy
+変更をmainブランチに反映させて，デプロイします！
+
+...(作業中)
+
