@@ -241,7 +241,7 @@ end
 ![](image/2023-06-27-22-42-31.png)
 *[第2章 Toyアプリケーション - Railsチュートリアル](https://railstutorial.jp/chapters/toy_app?version=7.0#cha-a_toy_app)，表2.2より*
 
-さて，ローカルで起動してみて検証してみます．
+さて，ローカルで起動してみて確認してみます．
 
 ```
 $ rails s
