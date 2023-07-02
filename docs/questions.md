@@ -7,3 +7,6 @@ date: "2023-07-01"
 2023-07-01
 
 - controllerのactionの違い（indexとshow）
+- Rspecの見やすい書き方（自分のは見やすい？？）
+- Serviceオブジェクトの利用
+- git commitメッセージの工夫
