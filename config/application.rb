@@ -23,5 +23,8 @@ module FibonacciWebapi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # serviceディレクトリを作ったのですが，そのpathを読み込んでくれない時におまじないのつもりで書きました．効果なかったです．
+    # config.autoload_paths += Dir.glob("#{config.root}/app/services")
   end
 end

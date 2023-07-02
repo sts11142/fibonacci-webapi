@@ -62,7 +62,7 @@ date: "2023-06-29"
       
   Desc:
       エンドポイントに対し，パラメータで指定した数値のフィボナッチ数を取得できるAPI．
-          ex) https://sample-api-app/fib?n=10  ->  50
+          ex) https://sample-api-app/fib?n=10  ->  55
 ```
 
 ---
