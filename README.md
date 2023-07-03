@@ -12,7 +12,8 @@ $ curl -X GET -H "application/json" "https://sample-api-app.onrender.com/fb?n=10
 ```
 
 #### Response
-Results will be displayed in `JSON` string
+Results will be displayed in `JSON` string.  
+**Please wait 0.5~1 minutes because this proj uses 'Render.com' and joins in free plan. sry;;**
 ```
 ex)
 
@@ -30,8 +31,8 @@ ex)
 }
 ```
 
-## Document
-Source Tree: 
+## Project detail
+Source Tree: [detail is here](./docs/document.md)
 
 ```
 $ tree -a -A -C -U -I .git -L 2
