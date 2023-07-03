@@ -64,13 +64,14 @@ Rspecは，Rubyにおけるテスティングフレームワークです．
 |  5  | ?n=(指定なし) | 400・{ "status": 400, "errors": <br />[{"type": "invalid-parameter", "title": "パラメータの値が不正です"}] } |
 |  6  | /fb (?n= が無し) | 400・{ "status": 400, "errors": <br />[{"type": "invalid-parameter", "title": "パラメータの値が不正です"}] } |
 |  7  | ?n="string" | 400・{ "status": 400, "errors": <br />[{"type": "invalid-parameter", "title": "パラメータの値が不正です"}] } |
+|  8  | ?n=-10 | 400・{ "status": 400, "errors": <br />[{"type": "invalid-parameter", "title": "パラメータの値が不正です"}] } |
 | | | |
 
 
 フィボナッチ数はn=0,1の時の値が定義されているため，検証を行います（境界値分析っぽく）．  
 また，最大数は考慮しません（rubyは整数型の最大幅が無限...固定長の長さを超えるとメモリ依存の無限多倍長整数に拡張されるとのこと．wow）
 
-"errors"を配列にしているので，エラーの種類に応じて複数のエラーを渡せます．  今回は時間があったら作り込みましょう（この文章が残っているということは，つまりそういうこと）
+"errors"を配列にしているので，エラーの種類に応じて複数のエラーを渡せます．  
 
 
 # APIを実装する！！ with テスト
@@ -559,3 +560,13 @@ $ bundle exec rspec
 
 ローカル環境でAPI実装が完了したので，実際にデプロイして試してみます．
 
+...無事に，デプロイ完了しました〜
+
+↓↓こちらからアクセスしてみてください！！↓↓
+
+[sapmle-api-app](https://sample-api-app.onrender.com/fb?n=10)  
+`?n=`の部分を変えてみて，正しく動作しているか試してみてください
+
+```
+$ curl -X GET -H "application/json" "https://sample-api-app.onrender.com/fb?n=10"
+```

@@ -62,7 +62,7 @@ RSpec.describe "Fibonacci API", type: :request do
 
 
   # No.4  負例  パラメータが不動小数点数
-  describe 'No.4  GET /fb?n=1.5 (invalid parameter)' do
+  describe 'No.4  GET /fb?n=1.5 (invalid parameter float-param)' do
     before do
       get '/fb', params: { n: 1.5 }
     end
@@ -82,7 +82,7 @@ RSpec.describe "Fibonacci API", type: :request do
   
 
   # No.5  負例  パラメータに値を指定しない
-  describe 'No.5  GET /fb?n= (invalid parameter)' do
+  describe 'No.5  GET /fb?n= (invalid parameter no-param)' do
     before do
       get '/fb?n='
     end
@@ -102,7 +102,7 @@ RSpec.describe "Fibonacci API", type: :request do
 
 
     # No.6  負例  パラメータを指定しない
-    describe 'No.6  GET /fb (invalid parameter)' do
+    describe 'No.6  GET /fb (invalid parameter no-param)' do
       before do
         get '/fb'
       end
@@ -122,9 +122,29 @@ RSpec.describe "Fibonacci API", type: :request do
 
 
   # No.7  負例  パラメータの値が文字列
-  describe 'No.7  GET /fb?n="string" (invalid parameter)' do
+  describe 'No.7  GET /fb?n="string" (invalid parameter string)' do
     before do
       get '/fb', params: { n: "string" }
+    end
+
+    # 400: リクエストに異常があり，正しく受付されなかった
+    it 'returns 400 status' do
+      expect(response).to have_http_status(400)
+    end
+
+    # error-type: 'incalid-parameter'
+    it 'returns correct (error) JSON' do
+      json = JSON.parse(response.body)  # resuponse.body は文字列
+      expect(json['status']).to eq(400)
+      expect(json['errors']).to eq( [ 'type' => 'invalid-parameter', 'title' => 'パラメータの値が不正です' ] )
+    end
+  end
+
+
+  # No.8  負例  パラメータの値が負数
+  describe 'No.8  GET /fb?n=-10 (invalid parameter negative)' do
+    before do
+      get '/fb', params: { n: -10 }
     end
 
     # 400: リクエストに異常があり，正しく受付されなかった

@@ -56,7 +56,7 @@ date: "2023-06-29"
           {
             "status": 400,
             "errors": [
-              { "type": "bad-request", "title": "パラメータの指定が不正です" },
+              { "type": "invalid-parameter", "title": "パラメータの指定が不正です" },
             ]
           }
       
